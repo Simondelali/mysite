@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import admin
 import datetime
 
 from django.utils import timezone
@@ -11,6 +12,12 @@ class Questions(models.Model):
 
     def __str__(self):
         return self.question_text
+    
+    @admin.display(
+        boolean=True,
+        ordering="pub_date",
+        description="Published recently?",
+    )
 
     def was_published_recently(self):
         now = timezone.now()
